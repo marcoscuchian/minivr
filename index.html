@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannellum con Widget de Lentes VR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: url('imagenes/fondo_pantalla.jpg') no-repeat center center fixed;
+            background-size: cover;  
+        }
+
+        #panorama {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999; 
+            background-color: #000;
+        }
+
+        
+        #vr-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: url('imagenes/lentes_vr.jpg') no-repeat center;
+            background-size: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<button id="vr-widget" title="Abrir visor VR"></button>
+
+<div id="panorama"></div>
+
+<script>
+let isPannellumVisible = false;
+
+function initPannellum() {
+    pannellum.viewer('panorama', {
+        "default": {
+            "firstScene": "habitacion",
+            "sceneFadeDuration": 1000,
+            "autoLoad": true,
+            "showControls": true
+        },
+        "scenes": {
+            "habitacion": {
+                "type": "equirectangular",
+                "panorama": "imagenes/habitacion.jpg",
+                "hotSpots": [
+                    {
+                        "pitch": 0,
+                        "yaw": 60,
+                        "type": "scene",
+                        "text": "Ir a la otra habitación (1)",
+                        "sceneId": "otra_habitacion"
+                    },
+                    {
+                        "pitch": 0,
+                        "yaw": 89,
+                        "type": "scene",
+                        "text": "Ir a la otra habitación (2)",
+                        "sceneId": "otra_habitacion2"
+                    }
+                ]
+            },
+            "otra_habitacion": {
+                "type": "equirectangular",
+                "panorama": "imagenes/otra_habitacion.jpg",
+                "hotSpots": [
+                    {
+                        "pitch": 0,
+                        "yaw": -20,
+                        "type": "scene",
+                        "text": "Volver a la habitación principal",
+                        "sceneId": "habitacion"
+                    },
+                    {
+                        "pitch": 0,
+                        "yaw": 90,
+                        "type": "scene",
+                        "text": "Ir a la tercera habitación",
+                        "sceneId": "otra_habitacion2"
+                    }
+                ]
+            },
+            "otra_habitacion2": {
+                "type": "equirectangular",
+                "panorama": "imagenes/otra_habitacion2.jpg",
+                "hotSpots": [
+                    {
+                        "pitch": 0,
+                        "yaw": -10,
+                        "type": "scene",
+                        "text": "Volver a la habitación principal",
+                        "sceneId": "habitacion"
+                    },
+                    {
+                        "pitch": 0,
+                        "yaw": 120,
+                        "type": "scene",
+                        "text": "Ir a la segunda habitación",
+                        "sceneId": "otra_habitacion"
+                    }
+                ]
+            }
+        }
+    });
+}
+function togglePannellum() {
+    const panoramaElement = document.getElementById('panorama');
+    if (isPannellumVisible) {
+        panoramaElement.style.display = 'none';
+        panoramaElement.innerHTML = '';
+    } else {
+        panoramaElement.style.display = 'block';
+        initPannellum();
+    }
+    isPannellumVisible = !isPannellumVisible;
+}
+document.getElementById('vr-widget').addEventListener('click', togglePannellum);
+</script>
+
+</body>
+</html>
