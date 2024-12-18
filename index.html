@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,12 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            background: url('imagenes/fondo_pantalla.jpg') no-repeat center center fixed;
+            background: url('imagenes/imagenprincipal.jpg') no-repeat center center fixed;
             background-size: cover;
             background-position: center center;
         }
 
+        /* Contenedor del visor Pannellum */
         #panorama {
             display: none;
             position: fixed;
@@ -29,6 +30,7 @@
             background-color: #000;
         }
 
+        /* Botón flotante del widget VR */
         #vr-widget {
             position: fixed;
             bottom: 20px;
@@ -124,7 +126,7 @@ function initPannellum() {
             },
             "otra_habitacion2": {
                 "type": "equirectangular",
-                "panorama": "imagenes/otra_habitacion2.jpg",
+                "panorama": "imagenes/otra_habitacion.jpg",
                 "hotSpots": [
                     {
                         "pitch": 0,
