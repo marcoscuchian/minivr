@@ -14,7 +14,8 @@
             width: 100%;
             overflow: hidden;
             background: url('imagenes/fondo_pantalla.jpg') no-repeat center center fixed;
-            background-size: cover;  
+            background-size: cover;
+            background-position: center center;
         }
 
         #panorama {
@@ -28,7 +29,6 @@
             background-color: #000;
         }
 
-        
         #vr-widget {
             position: fixed;
             bottom: 20px;
@@ -42,6 +42,25 @@
             cursor: pointer;
             z-index: 1000;
             border: none;
+        }
+
+        /* Media Queries para dispositivos móviles */
+        @media (max-width: 768px) {
+            #vr-widget {
+                width: 60px;
+                height: 60px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #vr-widget {
+                width: 50px;
+                height: 50px;
+                bottom: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -126,6 +145,7 @@ function initPannellum() {
         }
     });
 }
+
 function togglePannellum() {
     const panoramaElement = document.getElementById('panorama');
     if (isPannellumVisible) {
@@ -137,6 +157,7 @@ function togglePannellum() {
     }
     isPannellumVisible = !isPannellumVisible;
 }
+
 document.getElementById('vr-widget').addEventListener('click', togglePannellum);
 </script>
 
